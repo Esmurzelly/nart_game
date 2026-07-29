@@ -4,6 +4,7 @@ var is_attacking = false
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -500.0
+var jump_count: int = 0
 
 func _physics_process(delta: float) -> void:
 	# Если атакуем, не обрабатываем ввод для движения и прыжков
@@ -16,8 +17,12 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and jump_count < 1:
+		jump_count += 1
 		velocity.y = JUMP_VELOCITY
+	
+	if is_on_floor():
+		jump_count = 0
 
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("left", "right")
@@ -29,8 +34,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	var anim = $AnimatedSprite2D
-	
-		
+
 	if Input.is_action_just_pressed("attack"):
 		is_attacking = true
 		anim.play("attack")
@@ -51,7 +55,6 @@ func _physics_process(delta: float) -> void:
 				anim.scale.x = -abs(anim.scale.x)
 		else:
 			anim.play("idle")
-			
 
 func _on_attack_finished():
 	if $AnimatedSprite2D.animation == "attack":
