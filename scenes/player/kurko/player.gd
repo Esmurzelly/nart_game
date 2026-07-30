@@ -6,6 +6,8 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -500.0
 var jump_count: int = 0
 
+var can_move = true
+
 func _physics_process(delta: float) -> void:
 	# Если атакуем, не обрабатываем ввод для движения и прыжков
 	if is_attacking:
@@ -55,6 +57,8 @@ func _physics_process(delta: float) -> void:
 				anim.scale.x = -abs(anim.scale.x)
 		else:
 			anim.play("idle")
+			
+			
 
 func _on_attack_finished():
 	if $AnimatedSprite2D.animation == "attack":

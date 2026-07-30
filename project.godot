@@ -20,6 +20,11 @@ config/icon="res://icon.svg"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[global_group]
+
+main_player=""
+golem=""
+
 [input]
 
 right={
@@ -50,6 +55,9 @@ attack={
 2d_physics/layer_1="background"
 2d_physics/layer_2="player"
 2d_physics/layer_3="wand"
+2d_physics/layer_4="Enemy"
+2d_physics/layer_5="Layer 5"
+2d_physics/layer_6="Layer 6"
 
 [physics]
 
