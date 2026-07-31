@@ -1,15 +1,15 @@
 extends Area2D
 class_name HurtBox
 
-signal hurted()
-signal died()
+signal hurted(value)
+#signal died()
 
-@export var healthPoint := 3
+#@export var healthPoint := 3
 
 func get_damage(value: int):
-	healthPoint -= value
+	#healthPoint -= value
 	
-	hurted.emit()
+	hurted.emit(value)
 	
-	if healthPoint <= 0:
-		died.emit()
+	#if healthPoint <= 0:
+		#died.emit()

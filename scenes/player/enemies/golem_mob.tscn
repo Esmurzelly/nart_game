@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cm4coovt6mdd0" path="res://scenes/player/enemies/Golem_1/Blue/White_Swoosh_VFX/Golem_1_hurt.png" id="4_qxcu8"]
 [ext_resource type="Texture2D" uid="uid://bs2f486k2py6" path="res://scenes/player/enemies/Golem_1/Blue/White_Swoosh_VFX/Golem_1_idle.png" id="5_crwga"]
 [ext_resource type="Texture2D" uid="uid://ey4cj13mq557" path="res://scenes/player/enemies/Golem_1/Blue/White_Swoosh_VFX/Golem_1_walk.png" id="6_ams01"]
-[ext_resource type="Script" uid="uid://wjedea7aw75c" path="res://scenes/player/enemies/hurtbox.gd" id="7_p5508"]
+[ext_resource type="PackedScene" uid="uid://dke12v2tjwwkb" path="res://scripts/components/Hitbox.tscn" id="7_qxcu8"]
 [ext_resource type="PackedScene" uid="uid://dywr857hak1vs" path="res://scripts/components/HurtBox.tscn" id="8_6ihb6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6aexv"]
@@ -229,7 +229,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5l2vs")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"attack",
 "speed": 5.0
 }, {
@@ -290,7 +290,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gvof7")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"hurt",
 "speed": 5.0
 }, {
@@ -359,52 +359,42 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_3xd07"]
-radius = 67.11929
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dwbtc"]
+size = Vector2(37, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jq8tk"]
-size = Vector2(38, 38)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3xd07"]
 size = Vector2(38, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6fhyq"]
 size = Vector2(38, 38)
 
-[node name="GolemMob" type="RigidBody2D" unique_id=289356010]
-lock_rotation = true
-contact_monitor = true
-max_contacts_reported = 1
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6ihb6"]
+radius = 46.0
+height = 368.0
+
+[node name="GolemMob" type="CharacterBody2D" unique_id=64462546]
 script = ExtResource("1_3n6va")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=399517962]
 sprite_frames = SubResource("SpriteFrames_3xd07")
-animation = &"die"
+animation = &"attack"
 autoplay = "idle"
 
-[node name="checkPlayer" type="Area2D" parent="AnimatedSprite2D" unique_id=514204225]
-visible = false
+[node name="Hitbox" parent="AnimatedSprite2D" unique_id=1002140977 instance=ExtResource("7_qxcu8")]
+position = Vector2(20, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/checkPlayer" unique_id=1540533147]
-position = Vector2(-1, 13)
-shape = SubResource("CircleShape2D_3xd07")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/Hitbox" unique_id=420949415]
+position = Vector2(13.5, 13)
+shape = SubResource("RectangleShape2D_dwbtc")
+debug_color = Color(0.40001047, 0.60468477, 0.21534386, 0.41960785)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1832429030]
+visible = false
 position = Vector2(0, 13)
 shape = SubResource("RectangleShape2D_jq8tk")
 
-[node name="Hurtbox" type="Area2D" parent="." unique_id=1940130713]
-visible = false
-collision_layer = 8
-collision_mask = 2
-script = ExtResource("7_p5508")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=553110656]
-position = Vector2(0, 13)
-shape = SubResource("RectangleShape2D_3xd07")
-debug_color = Color(0.85959995, 0.3089247, 0.4999069, 0.41960785)
-
 [node name="HurtBox" parent="." unique_id=90363310 instance=ExtResource("8_6ihb6")]
+visible = false
 collision_layer = 8
 collision_mask = 2
 
@@ -413,6 +403,16 @@ position = Vector2(0, 13)
 shape = SubResource("RectangleShape2D_6fhyq")
 debug_color = Color(0.94009703, 0.15461996, 0.483885, 0.41960785)
 
-[connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_on_area_entered"]
-[connection signal="died" from="HurtBox" to="." method="_on_hurt_box_died"]
+[node name="DetectHero" type="Area2D" parent="." unique_id=774118136]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectHero" unique_id=1625644026]
+position = Vector2(-1, 9)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_6ihb6")
+
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="hurted" from="HurtBox" to="." method="_on_hurt_box_hurted"]
+[connection signal="body_entered" from="DetectHero" to="." method="_on_detect_hero_body_entered"]
+[connection signal="body_exited" from="DetectHero" to="." method="_on_detect_hero_body_exited"]

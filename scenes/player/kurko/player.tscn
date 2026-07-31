@@ -4,8 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://d2eo0b5nnp6td" path="res://icon.svg" id="2_gclpx"]
 [ext_resource type="Texture2D" uid="uid://srpad0h2dnaj" path="res://scenes/player/kurko/Sprites/ATTACK 1.png" id="3_p7h5g"]
 [ext_resource type="Texture2D" uid="uid://cbvad7ykbfttj" path="res://scenes/player/kurko/Sprites/IDLE.png" id="4_2707y"]
+[ext_resource type="Texture2D" uid="uid://cnih0k0na2r82" path="res://scenes/player/kurko/Sprites/HURT.png" id="4_x622i"]
 [ext_resource type="Texture2D" uid="uid://bfb70vbsincn5" path="res://scenes/player/kurko/Sprites/RUN.png" id="5_x622i"]
 [ext_resource type="PackedScene" uid="uid://dke12v2tjwwkb" path="res://scripts/components/Hitbox.tscn" id="6_gclpx"]
+[ext_resource type="PackedScene" uid="uid://dywr857hak1vs" path="res://scripts/components/HurtBox.tscn" id="7_p7h5g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jq8tk"]
 size = Vector2(28, 35)
@@ -37,6 +39,22 @@ region = Rect2(480, 0, 96, 96)
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ctrd"]
 atlas = ExtResource("3_p7h5g")
 region = Rect2(576, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6mfo"]
+atlas = ExtResource("4_x622i")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xrerd"]
+atlas = ExtResource("4_x622i")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cfenr"]
+atlas = ExtResource("4_x622i")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cwov"]
+atlas = ExtResource("4_x622i")
+region = Rect2(288, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rqrjq"]
 atlas = ExtResource("4_2707y")
@@ -170,8 +188,20 @@ animations = [{
 "name": &"attack",
 "speed": 5.0
 }, {
-"frames": [],
-"loop": 1,
+"frames": [{
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_d6mfo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xrerd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cfenr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cwov")
+}],
+"loop": 0,
 "name": &"hurt",
 "speed": 5.0
 }, {
@@ -292,10 +322,8 @@ texture = ExtResource("2_gclpx")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1387285353]
 position = Vector2(25, 10)
 sprite_frames = SubResource("SpriteFrames_3xd07")
-animation = &"attack"
+animation = &"idle"
 autoplay = "idle"
-frame = 6
-frame_progress = 1.0
 speed_scale = 5.0
 
 [node name="Hitbox2" parent="AnimatedSprite2D" unique_id=1002140977 instance=ExtResource("6_gclpx")]
@@ -309,14 +337,12 @@ shape = SubResource("RectangleShape2D_3xd07")
 disabled = true
 debug_color = Color(0.9286956, 0.20450845, 0.43907252, 0.42)
 
-[node name="Hitbox" type="Area2D" parent="AnimatedSprite2D" unique_id=1869965569 groups=["player_attack"]]
-visible = false
-collision_layer = 2
-collision_mask = 8
+[node name="HurtBox" parent="." unique_id=1185102022 instance=ExtResource("7_p7h5g")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/Hitbox" unique_id=722819068]
-position = Vector2(32.25, 15.5)
-shape = SubResource("RectangleShape2D_3xd07")
-disabled = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=2012571864]
+position = Vector2(24, 25.5)
+shape = SubResource("RectangleShape2D_jq8tk")
+debug_color = Color(0.18321976, 0.64294636, 0, 0.41960785)
 
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
+[connection signal="hurted" from="HurtBox" to="." method="_on_hurt_box_hurted"]

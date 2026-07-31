@@ -1,6 +1,8 @@
 extends Area2D
 class_name HitBox
 
+@export var damage: int = 1
+
 func _ready() -> void:
 	set_active(false)
 
@@ -12,5 +14,5 @@ func set_active(boolean: bool):
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is HurtBox:
-		area.get_damage(1)
+		area.get_damage(damage)
 		
