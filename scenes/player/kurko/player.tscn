@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://srpad0h2dnaj" path="res://scenes/player/kurko/Sprites/ATTACK 1.png" id="3_p7h5g"]
 [ext_resource type="Texture2D" uid="uid://cbvad7ykbfttj" path="res://scenes/player/kurko/Sprites/IDLE.png" id="4_2707y"]
 [ext_resource type="Texture2D" uid="uid://bfb70vbsincn5" path="res://scenes/player/kurko/Sprites/RUN.png" id="5_x622i"]
+[ext_resource type="PackedScene" uid="uid://dke12v2tjwwkb" path="res://scripts/components/Hitbox.tscn" id="6_gclpx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jq8tk"]
 size = Vector2(28, 35)
@@ -264,7 +265,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3xd07"]
-size = Vector2(24.5, 35)
+size = Vector2(31.625, 35)
 
 [node name="Player" type="CharacterBody2D" unique_id=1484906780 groups=["main_player"]]
 z_index = 1
@@ -297,11 +298,25 @@ frame = 6
 frame_progress = 1.0
 speed_scale = 5.0
 
-[node name="SwordArea" type="Area2D" parent="AnimatedSprite2D" unique_id=1869965569]
-collision_layer = 8
-collision_mask = 32
+[node name="Hitbox2" parent="AnimatedSprite2D" unique_id=1002140977 instance=ExtResource("6_gclpx")]
+position = Vector2(-25, -10)
+collision_layer = 2
+collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/SwordArea" unique_id=722819068]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/Hitbox2" unique_id=242664283]
+position = Vector2(53.813, 25)
+shape = SubResource("RectangleShape2D_3xd07")
+disabled = true
+debug_color = Color(0.9286956, 0.20450845, 0.43907252, 0.42)
+
+[node name="Hitbox" type="Area2D" parent="AnimatedSprite2D" unique_id=1869965569 groups=["player_attack"]]
+visible = false
+collision_layer = 2
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/Hitbox" unique_id=722819068]
 position = Vector2(32.25, 15.5)
 shape = SubResource("RectangleShape2D_3xd07")
 disabled = true
+
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]

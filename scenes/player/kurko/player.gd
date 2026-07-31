@@ -6,6 +6,9 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -500.0
 var jump_count: int = 0
 
+@onready var hitbox: HitBox = $AnimatedSprite2D/Hitbox2
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+
 var can_move = true
 
 func _physics_process(delta: float) -> void:
@@ -35,12 +38,28 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 	
-	var anim = $AnimatedSprite2D
-
+	if Input.is_action_just_pressed("attack"):
+		attack()
+		return
+	
+	if velocity.x != 0:
+		animated_sprite_2d.play("run")
+	
+		if velocity.x > 0:
+			#anim.flip_h = false
+			animated_sprite_2d.scale.x = abs(animated_sprite_2d.scale.x)
+		else:
+				#anim.flip_h = true
+				print('left side!')
+				animated_sprite_2d.scale.x = -abs(animated_sprite_2d.scale.x)
+	else:
+		animated_sprite_2d.play("idle")
+	
+"""
 	if Input.is_action_just_pressed("attack"):
 		is_attacking = true
 		anim.play("attack")
-		$AnimatedSprite2D/SwordArea/CollisionShape2D.disabled = false
+		$AnimatedSprite2D/Hitbox/CollisionShape2D.disabled = false
 		# Подключаем встроенный сигнал окончания анимации
 		if not anim.animation_finished.is_connected(_on_attack_finished):
 			anim.animation_finished.connect(_on_attack_finished)
@@ -58,9 +77,36 @@ func _physics_process(delta: float) -> void:
 		else:
 			anim.play("idle")
 			
-			
-
+"""
 func _on_attack_finished():
 	if $AnimatedSprite2D.animation == "attack":
 		is_attacking = false
-		$AnimatedSprite2D/SwordArea/CollisionShape2D.disabled = true
+		$AnimatedSprite2D/Hitbox/CollisionShape2D.disabled = true
+
+
+func _on_animated_sprite_2d_frame_changed() -> void:
+	if not animated_sprite_2d: return
+	
+	var attackAnimation = animated_sprite_2d.animation == "attack"
+	var frame = animated_sprite_2d.frame
+	
+	if attackAnimation:
+		if frame == 4:
+			#$AnimatedSprite2D/Hitbox2/CollisionShape2D.disabled = false
+			hitbox.set_active(true)
+		elif frame == 6:
+			#$AnimatedSprite2D/Hitbox2/CollisionShape2D.disabled = true
+			hitbox.set_active(false)
+
+func attack():
+	set_physics_process(false)
+	animated_sprite_2d.play("attack")
+	await animated_sprite_2d.animation_finished
+	set_physics_process(true)
+	animated_sprite_2d.play("idle")
+	
+func _set_animation():
+	if velocity:
+		animated_sprite_2d.play("run")
+	else:
+		animated_sprite_2d.play("idle")

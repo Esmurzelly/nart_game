@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+@onready var animated_spite_2d: AnimatedSprite2D = $AnimatedSprite2D
+
 @export var max_health: int = 100
 @export var health: int
 var is_dead: bool = false
@@ -14,24 +16,21 @@ var start_x: float
 func _ready() -> void:
 	health = max_health
 	start_x = global_position.x
-	
-	print(start_x)
-	
-	
+
+
+
 func _physics_process(delta: float) -> void:
 	enemy_patrol()
-	
-	
-	if health <= 0:
-		die()
+		
+	#if health <= 0:
+		#die()
 
+"""
 func take_damage(damage:int) -> void:
 	if is_dead:
 		return
 		
 	health -= damage
-	
-	print("Golem HP: ", health)
 	
 	if health <= 0:
 		die()
@@ -43,6 +42,7 @@ func die():
 	await $AnimatedSprite2D.animation_finished
 	
 	queue_free()
+"""
 
 func enemy_patrol():
 	var distance_from_start = global_position.x - start_x
@@ -57,3 +57,12 @@ func enemy_patrol():
 		$AnimatedSprite2D.play("walk")
 		
 	linear_velocity.x = direction * speed
+
+
+func _on_hurt_box_hurted() -> void:
+	animated_spite_2d.play("hurt")
+
+
+func _on_hurt_box_died() -> void:
+	animated_spite_2d.play("die")
+	queue_free()
