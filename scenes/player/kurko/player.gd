@@ -6,6 +6,9 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -500.0
 var jump_count: int = 0
 
+const ATTACK_START_FRAME := 4
+const ATTACK_END_FRAME := 6
+
 @onready var hitbox: HitBox = $AnimatedSprite2D/Hitbox2
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -42,18 +45,7 @@ func _physics_process(delta: float) -> void:
 		attack()
 		return
 	
-	if velocity.x != 0:
-		animated_sprite_2d.play("run")
-	
-		if velocity.x > 0:
-			#anim.flip_h = false
-			animated_sprite_2d.scale.x = abs(animated_sprite_2d.scale.x)
-		else:
-				#anim.flip_h = true
-				print('left side!')
-				animated_sprite_2d.scale.x = -abs(animated_sprite_2d.scale.x)
-	else:
-		animated_sprite_2d.play("idle")
+	_set_animation()
 	
 """
 	if Input.is_action_just_pressed("attack"):
@@ -91,22 +83,37 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 	var frame = animated_sprite_2d.frame
 	
 	if attackAnimation:
-		if frame == 4:
+		if frame == ATTACK_START_FRAME:
 			#$AnimatedSprite2D/Hitbox2/CollisionShape2D.disabled = false
 			hitbox.set_active(true)
-		elif frame == 6:
+		elif frame == ATTACK_END_FRAME:
 			#$AnimatedSprite2D/Hitbox2/CollisionShape2D.disabled = true
 			hitbox.set_active(false)
 
 func attack():
-	set_physics_process(false)
+	if is_attacking:
+		return
+		
+	is_attacking = true
+	#set_physics_process(false)
 	animated_sprite_2d.play("attack")
 	await animated_sprite_2d.animation_finished
-	set_physics_process(true)
+	#set_physics_process(true)
+	hitbox.set_active(false)
+	is_attacking = false
 	animated_sprite_2d.play("idle")
 	
 func _set_animation():
-	if velocity:
-		animated_sprite_2d.play("run")
-	else:
-		animated_sprite_2d.play("idle")
+	if not is_attacking:
+		if velocity.x != 0:
+			animated_sprite_2d.play("run")
+	
+			if velocity.x > 0:
+				#anim.flip_h = false
+				animated_sprite_2d.scale.x = abs(animated_sprite_2d.scale.x)
+			else:
+					#anim.flip_h = true
+					print('left side!')
+					animated_sprite_2d.scale.x = -abs(animated_sprite_2d.scale.x)
+		else:
+			animated_sprite_2d.play("idle")
