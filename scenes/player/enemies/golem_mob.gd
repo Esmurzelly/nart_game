@@ -57,6 +57,13 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	_set_animation()
 	
+	#for i in range(get_slide_collision_count()): # number of timer the enemy collided
+	#	var collision = get_slide_collision(i) # particulary collision
+	#	
+	#	if collision.get_collider().is_in_group("main_player"): # if colliding body (player) in group
+	#		print("Player collide")
+	#		velocity.x = 0
+	
 func _set_animation() -> void:
 	if is_attacking or is_dead or is_hurt:
 		return
@@ -136,11 +143,6 @@ func _on_detect_hero_body_entered(body: Node2D) -> void:
 	if body.is_in_group("main_player"):
 		player = body
 		current_state = State.CHASE
-		
-		#if position.x - player.position.x < 2:
-			#current_state = State.ATTACK
-			#set_facing(sign(player.global_position.x - global_position.x))
-			#enemy_attack()
 
 
 func _on_detect_hero_body_exited(body: Node2D) -> void:

@@ -4,8 +4,8 @@ var is_attacking = false
 var is_hurt = false
 var is_dead = false
 
-@export var max_health := 10
-@export var player_health := max_health
+#@export var max_health := 10
+#@export var player_health := max_health
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -500.0
@@ -16,12 +16,17 @@ const ATTACK_END_FRAME := 6
 
 @onready var hitbox: HitBox = $AnimatedSprite2D/Hitbox2
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var health_component: HealthComponent = $HurtBox/HealthComponent
 
 var can_move = true
 var can_take_damage = true
 
+func _ready() -> void:
+	health_component.health_changed.connect(_on_health_changed)
+	health_component.died.connect(_on_died)
+
 func _physics_process(delta: float) -> void:
-	if is_attacking or is_hurt: #???
+	if is_attacking or is_hurt:
 		move_and_slide()
 		return
 		
@@ -48,6 +53,13 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	_set_animation()
+	
+	
+func _on_health_changed(current: int, max_hp: int) -> void:
+	print("HP =", current, "/", max_hp)
+	
+func _on_died() -> void:
+	die()
 	
 func _on_attack_finished():
 	if $AnimatedSprite2D.animation == "attack":
@@ -100,14 +112,8 @@ func _on_hurt_box_hurted(value) -> void:
 		return
 	
 	can_take_damage = false
-	player_health -= value
-	print("HP =", player_health)
-	
-	if player_health <= 0:
-		die()
-		return
-	
 	is_hurt = true
+	
 	animated_sprite_2d.play("hurt")
 	await animated_sprite_2d.animation_finished
 	is_hurt = false

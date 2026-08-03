@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bfb70vbsincn5" path="res://scenes/player/kurko/Sprites/RUN.png" id="5_x622i"]
 [ext_resource type="PackedScene" uid="uid://dke12v2tjwwkb" path="res://scripts/components/Hitbox.tscn" id="6_gclpx"]
 [ext_resource type="PackedScene" uid="uid://dywr857hak1vs" path="res://scripts/components/HurtBox.tscn" id="7_p7h5g"]
+[ext_resource type="PackedScene" uid="uid://cwctom4b7lrdl" path="res://scripts/components/health_component.tscn" id="9_x622i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jq8tk"]
 size = Vector2(28, 35)
@@ -300,7 +301,7 @@ size = Vector2(31.625, 35)
 [node name="Player" type="CharacterBody2D" unique_id=1484906780 groups=["main_player"]]
 z_index = 1
 collision_layer = 2
-collision_mask = 4
+collision_mask = 12
 script = ExtResource("1_6pu0i")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=759534300]
@@ -337,12 +338,15 @@ shape = SubResource("RectangleShape2D_3xd07")
 disabled = true
 debug_color = Color(0.9286956, 0.20450845, 0.43907252, 0.42)
 
-[node name="HurtBox" parent="." unique_id=1185102022 instance=ExtResource("7_p7h5g")]
+[node name="HurtBox" parent="." unique_id=1185102022 node_paths=PackedStringArray("health_component") instance=ExtResource("7_p7h5g")]
+health_component = NodePath("HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=2012571864]
 position = Vector2(24, 25.5)
 shape = SubResource("RectangleShape2D_jq8tk")
 debug_color = Color(0.18321976, 0.64294636, 0, 0.41960785)
+
+[node name="HealthComponent" parent="HurtBox" unique_id=1932021319 instance=ExtResource("9_x622i")]
 
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="hurted" from="HurtBox" to="." method="_on_hurt_box_hurted"]
