@@ -4,9 +4,6 @@ var is_attacking = false
 var is_hurt = false
 var is_dead = false
 
-#@export var max_health := 10
-#@export var player_health := max_health
-
 const SPEED = 300.0
 const JUMP_VELOCITY = -500.0
 var jump_count: int = 0

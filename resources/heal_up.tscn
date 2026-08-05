@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://c4po8pp88ibg6"]
+
+[ext_resource type="Script" uid="uid://dya7mg0cmaj4v" path="res://resources/heal_up.gd" id="1_r2vw0"]
+[ext_resource type="Texture2D" uid="uid://bq0p6j1n3wy5r" path="res://resources/hp_potion_10x.png" id="2_r2vw0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3xd07"]
+
+[node name="HealUp" type="Area2D" unique_id=714701977]
+collision_mask = 3
+script = ExtResource("1_r2vw0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=424071281]
+shape = SubResource("RectangleShape2D_3xd07")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1057786537]
+scale = Vector2(0.12832032, 0.12832032)
+texture = ExtResource("2_r2vw0")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

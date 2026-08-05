@@ -2,12 +2,20 @@
 
 [ext_resource type="Script" uid="uid://b2a46x03qepg1" path="res://scenes/player/enemies/golem_mob.gd" id="1_3n6va"]
 [ext_resource type="Texture2D" uid="uid://e0knqtbvbonc" path="res://scenes/player/enemies/Golem_1/Blue/White_Swoosh_VFX/Golem_1_attack.png" id="2_p5508"]
+[ext_resource type="Script" uid="uid://c0a17lc2206i1" path="res://resources/enemy/EnemyData.gd" id="2_qxcu8"]
 [ext_resource type="Texture2D" uid="uid://dk858c5yaip5i" path="res://scenes/player/enemies/Golem_1/Blue/White_Swoosh_VFX/Golem_1_die.png" id="3_6ihb6"]
 [ext_resource type="Texture2D" uid="uid://cm4coovt6mdd0" path="res://scenes/player/enemies/Golem_1/Blue/White_Swoosh_VFX/Golem_1_hurt.png" id="4_qxcu8"]
 [ext_resource type="Texture2D" uid="uid://bs2f486k2py6" path="res://scenes/player/enemies/Golem_1/Blue/White_Swoosh_VFX/Golem_1_idle.png" id="5_crwga"]
 [ext_resource type="Texture2D" uid="uid://ey4cj13mq557" path="res://scenes/player/enemies/Golem_1/Blue/White_Swoosh_VFX/Golem_1_walk.png" id="6_ams01"]
 [ext_resource type="PackedScene" uid="uid://dke12v2tjwwkb" path="res://scripts/components/Hitbox.tscn" id="7_qxcu8"]
 [ext_resource type="PackedScene" uid="uid://dywr857hak1vs" path="res://scripts/components/HurtBox.tscn" id="8_6ihb6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nbfr1"]
+
+[sub_resource type="Resource" id="Resource_yfx8f"]
+script = ExtResource("2_qxcu8")
+sprite_frames = SubResource("SpriteFrames_nbfr1")
+metadata/_custom_type_script = "uid://c0a17lc2206i1"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6aexv"]
 atlas = ExtResource("2_p5508")
@@ -376,6 +384,7 @@ height = 368.0
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_3n6va")
+enemy_data = SubResource("Resource_yfx8f")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=399517962]
 sprite_frames = SubResource("SpriteFrames_3xd07")

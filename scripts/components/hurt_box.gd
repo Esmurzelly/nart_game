@@ -9,4 +9,4 @@ func get_damage(value: int):
 	if health_component:
 		health_component.take_damage(value)
 	
-	hurted.emit(value)
+	hurted.emit(value) # signal for animation
