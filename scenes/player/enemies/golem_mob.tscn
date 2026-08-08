@@ -10,11 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://dke12v2tjwwkb" path="res://scripts/components/Hitbox.tscn" id="7_qxcu8"]
 [ext_resource type="PackedScene" uid="uid://dywr857hak1vs" path="res://scripts/components/HurtBox.tscn" id="8_6ihb6"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_nbfr1"]
-
-[sub_resource type="Resource" id="Resource_yfx8f"]
+[sub_resource type="Resource" id="Resource_h7k63"]
 script = ExtResource("2_qxcu8")
-sprite_frames = SubResource("SpriteFrames_nbfr1")
 metadata/_custom_type_script = "uid://c0a17lc2206i1"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6aexv"]
@@ -384,7 +381,7 @@ height = 368.0
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_3n6va")
-enemy_data = SubResource("Resource_yfx8f")
+stats = SubResource("Resource_h7k63")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=399517962]
 sprite_frames = SubResource("SpriteFrames_3xd07")

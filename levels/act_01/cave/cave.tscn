@@ -5,8 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://bnbbul2uvcqwr" path="res://assets/PixelFantasy_Caves_1.0/mainlev_build.png" id="6_icsl3"]
 [ext_resource type="PackedScene" uid="uid://fsdtvmjepw6f" path="res://scenes/player/enemies/golem_mob.tscn" id="6_wu1y2"]
 [ext_resource type="PackedScene" uid="uid://c4po8pp88ibg6" path="res://resources/heal_up.tscn" id="7_4g1uk"]
+[ext_resource type="Resource" uid="uid://iu0e01f580fq" path="res://resources/enemy/yellow_golem.tres" id="7_adxma"]
 [ext_resource type="PackedScene" uid="uid://bb2v2u08bbc08" path="res://scenes/player/kurko/player.tscn" id="7_h7k63"]
 [ext_resource type="Texture2D" uid="uid://d2tg23bbgbbns" path="res://assets/PixelFantasy_Caves_1.0/background4b.png" id="7_wu1y2"]
+[ext_resource type="Resource" uid="uid://81x0ubr3xydj" path="res://resources/enemy/blue_golem.tres" id="8_nfe07"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wu1y2"]
 bg_color = Color(0.95686275, 0.043137256, 0.19215687, 0.18039216)
@@ -1990,6 +1992,7 @@ tile_set = SubResource("TileSet_jq8tk")
 [node name="GolemMob" parent="." unique_id=289356010 instance=ExtResource("6_wu1y2")]
 position = Vector2(292, 30)
 collision_mask = 6
+stats = ExtResource("7_adxma")
 
 [node name="GolemMob2" parent="." unique_id=64462546 instance=ExtResource("6_wu1y2")]
 position = Vector2(484, 207)
@@ -1998,14 +2001,17 @@ collision_mask = 6
 [node name="GolemMob3" parent="." unique_id=2039661873 instance=ExtResource("6_wu1y2")]
 position = Vector2(-341, 208)
 collision_mask = 6
+stats = ExtResource("7_adxma")
 
 [node name="GolemMob4" parent="." unique_id=180055393 instance=ExtResource("6_wu1y2")]
 position = Vector2(1383, 17)
 collision_mask = 6
+stats = ExtResource("8_nfe07")
 
 [node name="GolemMob5" parent="." unique_id=364775051 instance=ExtResource("6_wu1y2")]
 position = Vector2(1952, 209)
 collision_mask = 6
+stats = ExtResource("7_adxma")
 
 [node name="HealUp" parent="." unique_id=714701977 instance=ExtResource("7_4g1uk")]
 position = Vector2(708, 53)

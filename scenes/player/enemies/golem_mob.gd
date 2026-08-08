@@ -2,14 +2,16 @@ extends CharacterBody2D
 
 @onready var animated_spite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
-@export var max_health := 3
-@export var enemy_health := max_health
-@export var attack_range: float = 20.0
+@export var stats: EnemyData
 
-@export var speed: float = 100.0
+var enemy_health: int
+var attack_range: float 
+
+var speed: float
 var direction: int = [-1, 1].pick_random() # -1 = влево, 1 = вправо
 
-@export var patrol_distance: float = 100.0
+var patrol_distance: float
+
 var start_x: float
 
 var is_attacking = false
@@ -32,7 +34,15 @@ const ATTACK_END_FRAME := 9
 @onready var hitbox: HitBox = $AnimatedSprite2D/Hitbox
 
 func _ready() -> void:
-	enemy_health = max_health
+	enemy_health = stats.max_health
+	speed = stats.speed
+	patrol_distance = stats.patrol_distance
+	attack_range = stats.attack_range
+	
+	if stats.sprite_frames:
+		animated_spite_2d.sprite_frames = stats.sprite_frames
+	
+	hitbox.damage = stats.attack_damage
 	start_x = global_position.x
 
 func _physics_process(delta: float) -> void:
@@ -57,12 +67,6 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	_set_animation()
 	
-	#for i in range(get_slide_collision_count()): # number of timer the enemy collided
-	#	var collision = get_slide_collision(i) # particulary collision
-	#	
-	#	if collision.get_collider().is_in_group("main_player"): # if colliding body (player) in group
-	#		print("Player collide")
-	#		velocity.x = 0
 	
 func _set_animation() -> void:
 	if is_attacking or is_dead or is_hurt:
