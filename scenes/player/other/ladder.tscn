@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://xen020e78u5r"]
+
+[ext_resource type="Script" uid="uid://c0wotgtohg86j" path="res://ladder.gd" id="1_d3bvp"]
+[ext_resource type="Texture2D" uid="uid://b5kqcvl4dl0al" path="res://scenes/player/other/wood_set/ladder/128x585/1.png" id="2_dcdt8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jq8tk"]
+size = Vector2(260.00006, 221.49997)
+
+[node name="Ladder" type="Node2D" unique_id=1409638214]
+scale = Vector2(0.2, 0.2)
+script = ExtResource("1_d3bvp")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1660373015]
+texture = ExtResource("2_dcdt8")
+
+[node name="BottomMarker" type="Marker2D" parent="." unique_id=781637075]
+position = Vector2(8.4703295e-22, 105.00001)
+
+[node name="TopMarker" type="Marker2D" parent="." unique_id=699048367]
+position = Vector2(0, -390)
+
+[node name="BottomZone" type="Area2D" parent="." unique_id=1671267528]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomZone" unique_id=1456819566]
+position = Vector2(0, 175.74994)
+scale = Vector2(0.99999964, 0.99999964)
+shape = SubResource("RectangleShape2D_jq8tk")
+debug_color = Color(0.38516602, 0.6119917, 0.05960901, 0.41960785)
+
+[connection signal="body_entered" from="BottomZone" to="." method="_on_bottom_zone_body_entered"]
+[connection signal="body_exited" from="BottomZone" to="." method="_on_bottom_zone_body_exited"]

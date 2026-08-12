@@ -17,7 +17,7 @@ class_name EnemyData
 @export var speed: float = 200
 @export var patrol_distance: float = 200
 @export var attack_damage: int = 1
-@export var attack_range: float = 20.0
+@export var attack_range: float = 40.0
 
 @export_group("Graphics")
 

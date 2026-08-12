@@ -18,12 +18,15 @@ const ATTACK_END_FRAME := 6
 var can_move = true
 var can_take_damage = true
 
+var is_climbing := false
+const CLIMB_SPEED := 100.0  # пикселей в секунду при подъёме/спуске
+
 func _ready() -> void:
 	health_component.health_changed.connect(_on_health_changed)
 	health_component.died.connect(_on_died)
 
 func _physics_process(delta: float) -> void:
-	if is_attacking or is_hurt:
+	if is_attacking or is_hurt or is_climbing:
 		move_and_slide()
 		return
 		
@@ -52,6 +55,28 @@ func _physics_process(delta: float) -> void:
 	_set_animation()
 	
 	
+func climb_ladder(from_pos: Vector2, to_pos: Vector2) -> void:
+	if is_climbing:
+		return
+	
+	is_climbing = true
+	velocity = Vector2.ZERO
+	global_position = from_pos  # аккуратно "примагничиваем" к началу лестницы
+	
+	#var going_up = to_pos.y < from_pos.y
+	animated_sprite_2d.play("climb")
+	#animated_sprite_2d.speed_scale = 5.0  #if going_up else -1.0
+	
+	var distance = from_pos.distance_to(to_pos)
+	var duration = distance / CLIMB_SPEED
+	
+	var tween = create_tween()
+	tween.tween_property(self, "global_position", to_pos, duration)
+	await tween.finished
+
+	#animated_sprite_2d.speed_scale = 1.0
+	is_climbing = false
+
 func _on_health_changed(current: int, max_hp: int) -> void:
 	print("HP =", current, "/", max_hp)
 	
