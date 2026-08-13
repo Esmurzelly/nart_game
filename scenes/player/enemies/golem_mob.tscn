@@ -379,7 +379,7 @@ height = 368.0
 
 [node name="GolemMob" type="CharacterBody2D" unique_id=64462546 groups=["golem"]]
 collision_layer = 8
-collision_mask = 2
+collision_mask = 6
 script = ExtResource("1_3n6va")
 stats = SubResource("Resource_h7k63")
 

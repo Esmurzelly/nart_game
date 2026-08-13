@@ -425,6 +425,10 @@ shape = SubResource("RectangleShape2D_jq8tk")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=966957258]
 zoom = Vector2(1.5, 1.5)
+limit_left = -650
+limit_top = -300
+limit_right = 19164
+limit_bottom = 3000
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1387285353]
 position = Vector2(-3, -18)

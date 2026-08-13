@@ -15,7 +15,7 @@ class_name EnemyData
 @export var max_health: int = 3
 @export var damage: int = 1
 @export var speed: float = 200
-@export var patrol_distance: float = 200
+@export var patrol_distance: float = 100
 @export var attack_damage: int = 1
 @export var attack_range: float = 40.0
 
