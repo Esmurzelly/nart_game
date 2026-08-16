@@ -11,5 +11,5 @@ func _on_body_entered(body: Node2D) -> void:
 		health_component.heal(1)
 
 	
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(0.1).timeout
 	queue_free()

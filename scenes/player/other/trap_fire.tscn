@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://cqg2txbald7ss"]
+
+[ext_resource type="Script" uid="uid://d1q1fwcax22xf" path="res://scenes/player/other/trap_fire.gd" id="1_teljr"]
+[ext_resource type="Texture2D" uid="uid://br26tuxy4ff7n" path="res://assets/traps/Foozle_2DTR0001_Pixel_Trap_Pack/Fire Trap/PNGs/Fire Trap - Level 2.png" id="1_xt4fo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_teljr"]
+atlas = ExtResource("1_xt4fo")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_87e7t"]
+atlas = ExtResource("1_xt4fo")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wxmio"]
+atlas = ExtResource("1_xt4fo")
+region = Rect2(64, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1m6q5"]
+atlas = ExtResource("1_xt4fo")
+region = Rect2(96, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3kmxn"]
+atlas = ExtResource("1_xt4fo")
+region = Rect2(128, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5ec8"]
+atlas = ExtResource("1_xt4fo")
+region = Rect2(160, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ltkl6"]
+atlas = ExtResource("1_xt4fo")
+region = Rect2(192, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qvon"]
+atlas = ExtResource("1_xt4fo")
+region = Rect2(224, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3uir1"]
+atlas = ExtResource("1_xt4fo")
+region = Rect2(256, 0, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3xd07"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_teljr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_87e7t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wxmio")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1m6q5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3kmxn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y5ec8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ltkl6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qvon")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3uir1")
+}],
+"loop": 1,
+"name": &"on",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3xd07"]
+size = Vector2(27, 37)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3xd07"]
+radius = 135.0
+
+[node name="Trap_Fire" type="Area2D" unique_id=1401712123]
+collision_mask = 3
+script = ExtResource("1_teljr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=98049741]
+sprite_frames = SubResource("SpriteFrames_3xd07")
+animation = &"on"
+frame_progress = 0.31400254
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=464297257]
+position = Vector2(0.5, 11.5)
+shape = SubResource("RectangleShape2D_3xd07")
+
+[node name="Detection" type="Area2D" parent="." unique_id=1204767945]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection" unique_id=844455648]
+position = Vector2(1, 12)
+shape = SubResource("CircleShape2D_3xd07")
+debug_color = Color(0.75212705, 0.3706821, 0.69895035, 0.41960785)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
+[connection signal="body_entered" from="Detection" to="." method="_on_detection_body_entered"]
+[connection signal="body_exited" from="Detection" to="." method="_on_detection_body_exited"]
