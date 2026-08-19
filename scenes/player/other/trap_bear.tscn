@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://be7kncdm5do4y"]
+
+[ext_resource type="Texture2D" uid="uid://ce4x3ba4an1lo" path="res://assets/traps/Bear_Trap.png" id="1_g3scb"]
+[ext_resource type="Script" uid="uid://b8o2anlxky2ak" path="res://scenes/player/other/trap_bear.gd" id="1_trpyw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trpyw"]
+atlas = ExtResource("1_g3scb")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvyk3"]
+atlas = ExtResource("1_g3scb")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2ppd"]
+atlas = ExtResource("1_g3scb")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qc20v"]
+atlas = ExtResource("1_g3scb")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3xd07"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_trpyw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvyk3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o2ppd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qc20v")
+}],
+"loop": 0,
+"name": &"on",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jq8tk"]
+size = Vector2(20, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3xd07"]
+size = Vector2(20, 18)
+
+[node name="trap_bear" type="Area2D" unique_id=1356366678]
+collision_mask = 3
+script = ExtResource("1_trpyw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=239158049]
+sprite_frames = SubResource("SpriteFrames_3xd07")
+animation = &"on"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1791839340]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_jq8tk")
+
+[node name="Detection" type="Area2D" parent="." unique_id=223239075]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection" unique_id=1213845036]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_3xd07")
+debug_color = Color(0.9632712, 0.19872054, 1.92523e-07, 0.41960785)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
+[connection signal="body_entered" from="Detection" to="." method="_on_detection_body_entered"]
+[connection signal="body_exited" from="Detection" to="." method="_on_detection_body_exited"]

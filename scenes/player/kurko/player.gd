@@ -3,6 +3,7 @@ extends CharacterBody2D
 var is_attacking = false
 var is_hurt = false
 var is_dead = false
+var is_frozen := false
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -500.0
@@ -26,7 +27,7 @@ func _ready() -> void:
 	health_component.died.connect(_on_died)
 
 func _physics_process(delta: float) -> void:
-	if is_attacking or is_hurt or is_climbing:
+	if is_attacking or is_hurt or is_climbing or is_frozen:
 		move_and_slide()
 		return
 		
@@ -149,3 +150,11 @@ func die() -> void:
 	animated_sprite_2d.play("idle") #change the animation
 	await get_tree().create_timer(2.0).timeout
 	get_tree().change_scene_to_file("res://levels/act_01/cave/cave.tscn")
+
+func freeze(duration: float) -> void:
+	if is_dead:
+		return
+	is_frozen = true
+	velocity = Vector2.ZERO
+	await get_tree().create_timer(duration).timeout
+	is_frozen = false

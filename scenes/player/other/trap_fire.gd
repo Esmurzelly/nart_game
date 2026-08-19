@@ -14,24 +14,23 @@ func _process(delta: float) -> void:
 	pass
 
 
-func _on_body_entered(body: Node2D) -> void:
+func _on_body_entered(body: CharacterBody2D) -> void:
 	if not body.is_in_group("main_player"):
 		return
 	
-	var health_component := body.get_node("HurtBox/HealthComponent") as HealthComponent
-	
-	if health_component:
-		health_component.take_damage(1)
+	var hurt_box := body.get_node("HurtBox") as HurtBox
+	if hurt_box:
+		hurt_box.get_damage(1)
 
 
-func _on_detection_body_entered(body: Node2D) -> void:
+func _on_detection_body_entered(body: CharacterBody2D) -> void:
 	if not body.is_in_group("main_player"):
 		return
 	
 	animated_sprite_2d.play("on")
 
 
-func _on_detection_body_exited(body: Node2D) -> void:
+func _on_detection_body_exited(body: CharacterBody2D) -> void:
 	if not body.is_in_group("main_player"):
 		return
 	

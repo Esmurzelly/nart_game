@@ -433,7 +433,7 @@ limit_bottom = 3000
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1387285353]
 position = Vector2(-3, -18)
 sprite_frames = SubResource("SpriteFrames_3xd07")
-animation = &"climb"
+animation = &"run"
 autoplay = "idle"
 speed_scale = 5.0
 
