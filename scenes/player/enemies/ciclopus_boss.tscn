@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://cdpgmnayahhno"]
+
+[ext_resource type="Texture2D" uid="uid://d2eo0b5nnp6td" path="res://icon.svg" id="1_bbbim"]
+[ext_resource type="Script" uid="uid://bqfugj38l1wys" path="res://scenes/player/enemies/ciclopus_boss.gd" id="1_cdfu4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3xd07"]
+size = Vector2(71, 95)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3xd07"]
+radius = 82.006096
+
+[node name="CiclopusBoss" type="CharacterBody2D" unique_id=500601636]
+collision_layer = 8
+collision_mask = 6
+script = ExtResource("1_cdfu4")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1435202399]
+position = Vector2(0, -2.6226044e-06)
+scale = Vector2(0.578125, 0.79687494)
+texture = ExtResource("1_bbbim")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1689231812]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_3xd07")
+
+[node name="DialogueDetection" type="Area2D" parent="." unique_id=223046951]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueDetection" unique_id=558730962]
+shape = SubResource("CircleShape2D_3xd07")
+debug_color = Color(0.42288685, 0.6016304, 0.1385302, 0.41960785)
+
+[connection signal="body_entered" from="DialogueDetection" to="." method="_on_dialogue_detection_body_entered"]

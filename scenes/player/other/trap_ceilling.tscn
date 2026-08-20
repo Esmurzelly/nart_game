@@ -126,7 +126,7 @@ script = ExtResource("1_iocrn")
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_hu7y6")
 animation = &"on"
-frame_progress = 0.79981816
+frame_progress = 0.51897305
 
 [node name="HitboxSmall" type="CollisionShape2D" parent="." unique_id=655630189]
 position = Vector2(0, 51)

@@ -27,6 +27,9 @@ func _ready() -> void:
 	health_component.died.connect(_on_died)
 
 func _physics_process(delta: float) -> void:
+	if is_dead:
+		return
+		
 	if is_attacking or is_hurt or is_climbing or is_frozen:
 		move_and_slide()
 		return
@@ -145,9 +148,15 @@ func _on_hurt_box_hurted(value) -> void:
 	can_take_damage = true
 
 func die() -> void:
+	if is_dead:
+		return
+	
 	is_dead = true
 	velocity = Vector2.ZERO
-	animated_sprite_2d.play("idle") #change the animation
+	
+	modulate = Color(1.0, 0.6, 0.4)
+	
+	animated_sprite_2d.play("idle") #change the animation!!!
 	await get_tree().create_timer(2.0).timeout
 	get_tree().change_scene_to_file("res://levels/act_01/cave/cave.tscn")
 

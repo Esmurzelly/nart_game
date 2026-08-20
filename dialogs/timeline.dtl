@@ -1,0 +1,20 @@
+join kurko center
+join ciclopus center
+if {CiclopusFall} == true:
+	kurko: finnally I killed him
+	kurko: I gotta go next
+	[end_timeline]
+if {CiclopusFall} == false:
+	ciclopus: u? u gotta be chased and prisoned!
+	kurko: who am I? who are you?
+	ciclopus: smth else
+	kurko: fa watafaaa
+	- fight
+		[signal arg="accept"]
+		[end_timeline]
+	- dialogue
+		kurko: что-то еще говорит
+		ciclopus: что-то еще отвечает
+		kurko: что-то еще спрашивает
+		ciclopus: короче, ему надоело всё, он хочет драцааааа
+		[end_timeline]
