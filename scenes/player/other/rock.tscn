@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://b1qrhqyqn2win"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_11ux1"]
+load_path = "res://.godot/imported/Rocks by Klyssilla_Tileset_32x32.png-34f8020660d31977c1d329b3d67ccb42.ctex"
+
+[node name="Rock" type="Sprite2D" unique_id=1034935753]
+scale = Vector2(0.765625, 0.765625)
+texture = SubResource("CompressedTexture2D_11ux1")
+region_enabled = true
+region_rect = Rect2(64, 64, 32, 32)

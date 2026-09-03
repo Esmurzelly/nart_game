@@ -134,7 +134,10 @@ func _on_hurt_box_hurted(value) -> void:
 		die()
 		return
 	
+	is_hurt = true
 	animated_spite_2d.play("hurt")
+	await animated_spite_2d.animation_finished
+	is_hurt = false
 
 func die() -> void:
 	is_dead = true

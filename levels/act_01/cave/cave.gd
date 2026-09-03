@@ -11,7 +11,7 @@ func _ready() -> void:
 	
 	Dialogic.start("start_cave")
 	main_player.is_frozen = true
-	Dialogic.timeline_ended.connect(_on_dialogic_end)
+	Dialogic.timeline_ended.connect(_on_dialogic_end, CONNECT_ONE_SHOT)
 	
 	Dialogic.signal_event.connect(_on_dialogic_signal)
 
