@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://dbgv4wt27nkfj"]
+
+[ext_resource type="Script" uid="uid://i1nlhhkuffps" path="res://scenes/ui/main_menu.gd" id="1_fe2o3"]
+[ext_resource type="AudioStream" uid="uid://dutskaun500ih" path="res://audio/music/music_menu.wav" id="2_1g8jr"]
+[ext_resource type="PackedScene" uid="uid://4u51imavj67" path="res://scenes/ui/settings_panel.tscn" id="3_1g8jr"]
+
+[node name="MainMenu" type="Control" unique_id=1529606645]
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1152.0
+offset_bottom = -648.0
+script = ExtResource("1_fe2o3")
+menu_music = ExtResource("2_1g8jr")
+metadata/_edit_vertical_guides_ = [1152.0]
+metadata/_edit_horizontal_guides_ = [648.0]
+
+[node name="PlayButton" type="Button" parent="." unique_id=1281379853]
+layout_mode = 0
+offset_left = 387.0
+offset_top = 57.0
+offset_right = 783.0
+offset_bottom = 150.0
+text = "Play"
+
+[node name="SettingsButton" type="Button" parent="." unique_id=653441124]
+layout_mode = 0
+offset_left = 389.0
+offset_top = 193.0
+offset_right = 786.0
+offset_bottom = 301.0
+text = "Settings"
+
+[node name="QuitButton" type="Button" parent="." unique_id=559628933]
+layout_mode = 0
+offset_left = 389.0
+offset_top = 347.0
+offset_right = 785.0
+offset_bottom = 466.0
+text = "Quit"
+
+[node name="SettingsPanel" parent="." unique_id=1063160638 instance=ExtResource("3_1g8jr")]
+layout_mode = 1
+offset_right = 0.0
+offset_bottom = 0.0

@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://4u51imavj67"]
+
+[ext_resource type="Script" uid="uid://b1fkoa7wg3pcp" path="res://scenes/ui/settings_panel.gd" id="1_dbor5"]
+
+[node name="SettingsPanel" type="Control" unique_id=1063160638]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1152.0
+offset_bottom = -648.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dbor5")
+
+[node name="TabContainer" type="TabContainer" parent="." unique_id=1254041157]
+layout_mode = 0
+offset_right = 1151.0
+offset_bottom = 660.0
+current_tab = 0
+
+[node name="Audio" type="VBoxContainer" parent="TabContainer" unique_id=958517424]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="MusicSlider" type="HSlider" parent="TabContainer/Audio" unique_id=906795598]
+layout_mode = 2
+
+[node name="SFXSlider" type="HSlider" parent="TabContainer/Audio" unique_id=1392618078]
+layout_mode = 2
+
+[node name="Music" type="Label" parent="TabContainer/Audio" unique_id=1226210061]
+layout_mode = 2
+text = "Music"
+
+[node name="SFX" type="Label" parent="TabContainer/Audio" unique_id=1000465423]
+layout_mode = 2
+text = "SFX"
+
+[node name="Controls" type="VBoxContainer" parent="TabContainer" unique_id=2080791576]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Label" type="Label" parent="TabContainer/Controls" unique_id=1674856264]
+layout_mode = 2
+text = "example"
+
+[node name="Label2" type="Label" parent="TabContainer/Controls" unique_id=1998910225]
+layout_mode = 2
+text = "example2"
+
+[node name="Label3" type="Label" parent="TabContainer/Controls" unique_id=2091380844]
+layout_mode = 2
+text = "example3"
+
+[node name="BackButton" type="Button" parent="." unique_id=1022316247]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 513.0
+offset_right = 397.0
+offset_bottom = 636.0
+text = "Back"

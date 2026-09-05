@@ -1,10 +1,21 @@
 [gd_scene format=3 uid="uid://b1qrhqyqn2win"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_11ux1"]
-load_path = "res://.godot/imported/Rocks by Klyssilla_Tileset_32x32.png-34f8020660d31977c1d329b3d67ccb42.ctex"
+[ext_resource type="Script" uid="uid://bejlf0d4pl5so" path="res://scenes/player/other/rock.gd" id="1_gel66"]
+[ext_resource type="Texture2D" uid="uid://ciwextkp87p4h" path="res://scenes/player/other/rock/Rocks by Klyssilla_Tileset_32x32.png" id="2_dpmbh"]
 
-[node name="Rock" type="Sprite2D" unique_id=1034935753]
-scale = Vector2(0.765625, 0.765625)
-texture = SubResource("CompressedTexture2D_11ux1")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3xd07"]
+size = Vector2(18, 24.5)
+
+[node name="ThrownRock" type="Area2D" unique_id=1015612135]
+script = ExtResource("1_gel66")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2141050752]
+texture = ExtResource("2_dpmbh")
 region_enabled = true
-region_rect = Rect2(64, 64, 32, 32)
+region_rect = Rect2(224, 160, 24, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1765205154]
+position = Vector2(-1, 1.75)
+shape = SubResource("RectangleShape2D_3xd07")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://cdpgmnayahhno"]
 
 [ext_resource type="Script" uid="uid://bqfugj38l1wys" path="res://scenes/player/enemies/ciclopus_boss.gd" id="1_cdfu4"]
-[ext_resource type="Script" uid="uid://c0a17lc2206i1" path="res://resources/enemy/EnemyData.gd" id="2_2685c"]
+[ext_resource type="Resource" uid="uid://ddcf670hvnxc1" path="res://resources/enemy/cyclops.tres" id="2_uwnop"]
 [ext_resource type="Texture2D" uid="uid://dhxkcxt7udgl3" path="res://scenes/player/enemies/Cyclops/Cyclops Sprite Sheet.png" id="3_5k7mp"]
 [ext_resource type="PackedScene" uid="uid://dke12v2tjwwkb" path="res://scripts/components/Hitbox.tscn" id="4_bybhu"]
+[ext_resource type="PackedScene" uid="uid://b1qrhqyqn2win" path="res://scenes/player/other/rock.tscn" id="4_uwnop"]
 [ext_resource type="PackedScene" uid="uid://dywr857hak1vs" path="res://scripts/components/HurtBox.tscn" id="5_bybhu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_achqh"]
@@ -242,225 +243,6 @@ region = Rect2(640, 64, 64, 64)
 atlas = ExtResource("3_5k7mp")
 region = Rect2(704, 64, 64, 64)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_bybhu"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_achqh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xo5e2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hpbpi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xxjwm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_r1skm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_e14nj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nqdta")
-}],
-"loop": 0,
-"name": &"attack_leg",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ju42g")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tbejp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6lsy2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6mxfu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_iwmj0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dr28u")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ajqki")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vm6tw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_271kx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_c42re")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cvbke")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_eynb5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xokps")
-}],
-"loop": 0,
-"name": &"attack_rock",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1ylvb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fumoh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yjms2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3thqe")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_i60p7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uqqvj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vtrym")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_64i2b")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fe3au")
-}],
-"loop": 0,
-"name": &"die",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uwnop")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gmuek")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_d8tva")
-}],
-"loop": 0,
-"name": &"hurt",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2kvk7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f8vxc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cjw2l")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kby8a")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jxylr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bmbqq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1ffcn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bron7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1oxeq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_e5rs1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_m3s1d")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0dqbb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_471h3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wvdrd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bvs6b")
-}],
-"loop": 1,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qkha2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_i178n")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mdx2b")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ri64j")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_73ckt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ehnxd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_l3pmj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kencp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kj2a1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tg7rf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_utsfl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gj1bf")
-}],
-"loop": 1,
-"name": &"walk",
-"speed": 5.0
-}]
-
-[sub_resource type="Resource" id="Resource_cdfu4"]
-script = ExtResource("2_2685c")
-enemy_name = "Cyclops"
-max_health = 15
-damage = 2
-patrol_distance = 200.0
-sprite_frames = SubResource("SpriteFrames_bybhu")
-metadata/_custom_type_script = "uid://c0a17lc2206i1"
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_3xd07"]
 animations = [{
 "frames": [{
@@ -692,7 +474,8 @@ scale = Vector2(1.5, 1.5)
 collision_layer = 8
 collision_mask = 6
 script = ExtResource("1_cdfu4")
-stats = SubResource("Resource_cdfu4")
+stats = ExtResource("2_uwnop")
+rock_scene = ExtResource("4_uwnop")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1558324491]
 position = Vector2(1, -13)
@@ -735,6 +518,9 @@ collision_mask = 2
 position = Vector2(-1.6666665, 0)
 shape = SubResource("RectangleShape2D_6fhyq")
 debug_color = Color(0.36089712, 0.61414844, 0.19119486, 0.41960785)
+
+[node name="RockSpawnPoint" type="Marker2D" parent="." unique_id=720982245]
+position = Vector2(0, -19.333334)
 
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="body_entered" from="DialogueDetection" to="." method="_on_dialogue_detection_body_entered"]

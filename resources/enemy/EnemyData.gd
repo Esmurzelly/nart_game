@@ -18,12 +18,19 @@ class_name EnemyData
 @export var patrol_distance: float = 100
 @export var attack_damage: int = 1
 @export var attack_range: float = 40.0
+@export var hurt_cooldown: float = 0.3
+
+@export_group("Boss settings")
+@export var boss_portrait: Texture2D
+@export var boss_display_name: String = ""
 
 @export_group("Graphics")
 
 @export var sprite_frames: SpriteFrames
 
 
-@export_group("Experience")
+@export_group("Other")
 
 @export var exp_reward: int = 10
+@export var hurt_sound: AudioStream
+@export var death_sound: AudioStream

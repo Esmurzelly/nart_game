@@ -4,6 +4,8 @@ extends CharacterBody2D
 
 @export var stats: EnemyData
 
+var can_react_to_hit := true
+
 var enemy_health: int
 var attack_range: float 
 
@@ -134,14 +136,26 @@ func _on_hurt_box_hurted(value) -> void:
 		die()
 		return
 	
+	if is_attacking:
+		return
+	
+	if not can_react_to_hit:
+		return
+	
+	can_react_to_hit = false
+	AudioManager.play_sfx(stats.hurt_sound, global_position)
 	is_hurt = true
 	animated_spite_2d.play("hurt")
 	await animated_spite_2d.animation_finished
 	is_hurt = false
+	
+	await get_tree().create_timer(stats.hurt_cooldown).timeout
+	can_react_to_hit = true
 
 func die() -> void:
 	is_dead = true
 	velocity = Vector2.ZERO
+	AudioManager.play_sfx(stats.death_sound, global_position)
 	animated_spite_2d.play("die")
 	await get_tree().create_timer(2.0).timeout
 	queue_free()

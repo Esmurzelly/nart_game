@@ -16,6 +16,10 @@ const ATTACK_END_FRAME := 6
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var health_component: HealthComponent = $HurtBox/HealthComponent
 
+@export var sword_swing_sound: AudioStream
+@export var sword_hit_sound: AudioStream
+@export var hurt_sound: AudioStream
+
 var can_move = true
 var can_take_damage = true
 
@@ -102,6 +106,7 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 	if attackAnimation:
 		if frame == ATTACK_START_FRAME:
 			hitbox.set_active(true)
+			AudioManager.play_sfx(sword_swing_sound, global_position)
 		elif frame == ATTACK_END_FRAME:
 			hitbox.set_active(false)
 
@@ -139,7 +144,8 @@ func _on_hurt_box_hurted(value) -> void:
 	
 	can_take_damage = false
 	is_hurt = true
-	
+	AudioManager.play_sfx(hurt_sound, global_position)
+
 	animated_sprite_2d.play("hurt")
 	await animated_sprite_2d.animation_finished
 	is_hurt = false
@@ -158,7 +164,27 @@ func die() -> void:
 	
 	animated_sprite_2d.play("idle") #change the animation!!!
 	await get_tree().create_timer(2.0).timeout
-	get_tree().change_scene_to_file("res://levels/act_01/cave/cave.tscn")
+	
+	respawn()
+
+func respawn() -> void:
+	modulate = Color(1, 1, 1, 1)
+	
+	var camera = get_node_or_null("Camera2D")
+	if camera:
+		camera.reset_smoothing()
+	
+	if CheckpointManager.has_checkpoint:
+		global_position = CheckpointManager.last_checkpoint_position
+	else:
+		global_position = Vector2.ZERO  # запасной вариант — стартовая точка уровня
+	
+	health_component.reset_health()
+	is_dead = false
+	is_hurt = false
+	can_take_damage = true
+	
+	CheckpointManager.player_respawned.emit()
 
 func freeze(duration: float) -> void:
 	if is_dead:

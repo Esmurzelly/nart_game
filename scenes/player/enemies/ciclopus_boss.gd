@@ -1,5 +1,9 @@
 extends CharacterBody2D
 
+signal boss_activated(boss_name: String, portrait: Texture2D, current: int, max_hp: int)
+signal health_changed(current, max_hp)
+signal boss_died
+
 @onready var animated_spite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hitbox: HitBox = $AnimatedSprite2D/Hitbox
 
@@ -8,6 +12,14 @@ extends CharacterBody2D
 @onready var detect_dialogue = $DialogueDetection/CollisionShape2D
 
 @export var stats: EnemyData
+
+@export var rock_scene: PackedScene
+const THROW_SPAWN_FRAME := 10
+var rock_thrown_this_attack := false
+
+var throw_target_pos: Vector2
+
+@onready var rock_spawn_point: Marker2D = $RockSpawnPoint
 
 const ATTACK_START_FRAME := 4
 const ATTACK_END_FRAME := 6
@@ -36,6 +48,8 @@ var is_dead = false
 var main_player: CharacterBody2D = null
 var main_player_animated_sprite
 
+var can_react_to_hit := true
+
 func _ready() -> void:
 	detect_hero.disabled = true
 	detect_dialogue.disabled = false
@@ -58,8 +72,11 @@ func _physics_process(delta: float) -> void:
 		return
 		
 	if not is_on_floor():
-		velocity += get_gravity() * delta	
+		velocity += get_gravity() * delta
 	
+	if is_hurt or is_attacking:
+		move_and_slide()
+		return
 	
 	match current_state:
 		State.CHASE:
@@ -141,10 +158,11 @@ func throw_attack():
 	
 	is_attacking = true
 	velocity.x = 0
+	rock_thrown_this_attack = false
 	
+	throw_target_pos = main_player.global_position if main_player else global_position
 	
 	animated_spite_2d.play("attack_rock")
-	# сюда позже добавишь instantiate/tween камня, привязанный к нужному frame_changed
 	await animated_spite_2d.animation_finished
 	is_attacking = false
 	
@@ -153,6 +171,32 @@ func throw_attack():
 	else:
 		main_player = null
 		current_state = State.IDLE
+
+func throw_rock_at_target(target_pos: Vector2) -> void:
+	if not rock_scene:
+		return
+	var rock = rock_scene.instantiate()
+	get_tree().current_scene.add_child(rock)
+	rock.global_position = rock_spawn_point.global_position
+	
+	var flight_duration := 0.6
+	var arc_height := 2.0
+	var from_pos = rock.global_position
+	
+	var tween = create_tween()
+	rock.flight_tween = tween
+	#tween.tween_property(rock, "global_position", target_pos, flight_duration)
+	tween.tween_method(
+		func(t: float):
+			var pos = from_pos.lerp(target_pos, t)
+			pos.y -= sin(t * PI) * arc_height
+			rock.global_position = pos,
+		0.0, 1.0, flight_duration
+	)
+	tween.tween_callback(func():
+		if is_instance_valid(rock):
+			rock.queue_free()  # если не попал за время полёта — убираем сам
+	)
 
 func is_player_in_detection_zone() -> bool:
 	var bodies = detect_hero_area.get_overlapping_bodies()
@@ -188,7 +232,10 @@ func _on_dialogic_end():
 
 func activate():
 	is_active = true
-	isDialog = false #del
+	isDialog = false
+	
+	boss_activated.emit(stats.boss_display_name, stats.boss_portrait, enemy_health, stats.max_health)
+	health_changed.emit(enemy_health, stats.max_health)
 	
 	var bodies = detect_hero_area.get_overlapping_bodies()
 	for body in bodies:
@@ -205,19 +252,33 @@ func _on_hurt_box_hurted(value: Variant) -> void:
 	
 	enemy_health -= value
 	print("Cyclops HP =", enemy_health)
+	health_changed.emit(enemy_health, stats.max_health)
 	
 	if enemy_health <= 0:
 		die()
 		return
 	
+	if is_attacking:
+		return
+		
+	if not can_react_to_hit:
+		return
+	
+	can_react_to_hit = false
+	AudioManager.play_sfx(stats.hurt_sound, global_position)
 	is_hurt = true
 	animated_spite_2d.play("hurt")
 	await animated_spite_2d.animation_finished
 	is_hurt = false
+	
+	await get_tree().create_timer(stats.hurt_cooldown).timeout
+	can_react_to_hit = true
 
 func die() -> void:
 	is_dead = true
 	velocity = Vector2.ZERO
+	AudioManager.play_sfx(stats.death_sound, global_position)
+	boss_died.emit()
 	animated_spite_2d.play("die")
 	Dialogic.VAR.CiclopusFall = true
 	await get_tree().create_timer(2.0).timeout
@@ -247,11 +308,17 @@ func _on_detect_hero_body_exited(body: Node2D) -> void:
 func _on_animated_sprite_2d_frame_changed() -> void:
 	if not animated_spite_2d: return
 	
-	var attackAnimation = animated_spite_2d.animation == "attack_leg"
+	var attackAnimationLeg = animated_spite_2d.animation == "attack_leg"
+	var attackAnimationRock = animated_spite_2d.animation == "attack_rock"
 	var frame = animated_spite_2d.frame
 
-	if attackAnimation:
+	if attackAnimationLeg:
 		if frame == ATTACK_START_FRAME:
 			hitbox.set_active(true)
 		elif frame == ATTACK_END_FRAME:
 			hitbox.set_active(false)
+			
+	elif attackAnimationRock:
+		if frame == THROW_SPAWN_FRAME and not rock_thrown_this_attack:
+			rock_thrown_this_attack = true
+			throw_rock_at_target(throw_target_pos)

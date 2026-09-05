@@ -1,7 +1,9 @@
 [gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://iu0e01f580fq"]
 
 [ext_resource type="Script" uid="uid://c0a17lc2206i1" path="res://resources/enemy/EnemyData.gd" id="1_tktdh"]
+[ext_resource type="AudioStream" uid="uid://qlyn5tqyb8a7" path="res://audio/sfx/death_enemy_2.wav" id="1_um0yp"]
 [ext_resource type="Texture2D" uid="uid://crva3ri52wvxt" path="res://scenes/player/enemies/Golem_1/Orange/White_Swoosh_VFX/Golem_1_attack.png" id="2_n523q"]
+[ext_resource type="AudioStream" uid="uid://bnuun0c5d1dyl" path="res://audio/sfx/death_enemy_1.wav" id="2_t4tre"]
 [ext_resource type="Texture2D" uid="uid://dr2s1pxi2nrtu" path="res://scenes/player/enemies/Golem_1/Orange/White_Swoosh_VFX/Golem_1_die.png" id="3_lq23c"]
 [ext_resource type="Texture2D" uid="uid://c01fbr63kulud" path="res://scenes/player/enemies/Golem_1/Orange/White_Swoosh_VFX/Golem_1_hurt.png" id="4_um0yp"]
 [ext_resource type="Texture2D" uid="uid://cukfoa77jn06m" path="res://scenes/player/enemies/Golem_1/Orange/White_Swoosh_VFX/Golem_1_idle.png" id="5_t4tre"]
@@ -363,4 +365,6 @@ max_health = 5
 speed = 300.0
 attack_damage = 2
 sprite_frames = SubResource("SpriteFrames_tktdh")
+hurt_sound = ExtResource("2_t4tre")
+death_sound = ExtResource("1_um0yp")
 metadata/_custom_type_script = "uid://c0a17lc2206i1"

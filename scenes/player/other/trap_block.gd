@@ -7,7 +7,8 @@ var is_breaking := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	solid_collision.disabled = false
+	reset_block()
+	CheckpointManager.player_respawned.connect(reset_block)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -45,4 +46,11 @@ func start_breaking() -> void:
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite_2d.animation == "on":
 		await get_tree().create_timer(1).timeout
-		queue_free()
+		visible = false
+
+func reset_block() -> void:
+	is_breaking = false
+	visible = true
+	solid_collision.disabled = false
+	animated_sprite_2d.stop()
+	animated_sprite_2d.frame = 0

@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://boxvwxgfkqnfq"]
+
+[ext_resource type="Script" uid="uid://bdpiksit7gowa" path="res://scripts/components/boss_health_bar.gd" id="1_3jifs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3jifs"]
+bg_color = Color(0.6, 0.6, 0.6, 0.13725491)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_hiql7"]
+color = Color(1, 0.003921569, 0.11372549, 1)
+thickness = 35
+
+[node name="BossHealthBar" type="Control" unique_id=626259841]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 535.0
+offset_bottom = 27.0
+script = ExtResource("1_3jifs")
+
+[node name="Portrait" type="TextureRect" parent="." unique_id=295997684]
+layout_mode = 0
+offset_left = 535.0
+offset_right = 575.0
+offset_bottom = 39.0
+expand_mode = 1
+
+[node name="NameLabel" type="Label" parent="." unique_id=1864891132]
+z_index = 1
+layout_mode = 0
+offset_left = 261.0
+offset_top = 8.0
+offset_right = 301.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.3137255)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=888975187]
+layout_mode = 0
+offset_right = 535.0
+offset_bottom = 39.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3jifs")
+theme_override_styles/fill = SubResource("StyleBoxLine_hiql7")
+show_percentage = false
