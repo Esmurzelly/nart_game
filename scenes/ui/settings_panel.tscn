@@ -1,63 +1,303 @@
 [gd_scene format=3 uid="uid://4u51imavj67"]
 
 [ext_resource type="Script" uid="uid://b1fkoa7wg3pcp" path="res://scenes/ui/settings_panel.gd" id="1_dbor5"]
+[ext_resource type="Texture2D" uid="uid://i1g28fpbn38n" path="res://resources/menu/menu_background.tres" id="2_bbxxw"]
+[ext_resource type="Texture2D" uid="uid://106r8bdjus1l" path="res://resources/menu/menu_button.tres" id="3_5qqek"]
+[ext_resource type="FontFile" uid="uid://c5p80fo6iqc2k" path="res://resources/fonts/Pixel-UniCode.ttf" id="3_bbxxw"]
+[ext_resource type="Texture2D" uid="uid://df1dqsaffyg0w" path="res://resources/menu/menu_button_hover.tres" id="4_bbxxw"]
+[ext_resource type="Texture2D" uid="uid://bebp8xqomxfub" path="res://resources/menu/settings_tab_button.tres" id="4_cax3f"]
+[ext_resource type="Texture2D" uid="uid://bb1uugyojl8he" path="res://resources/menu/settings_tab_button_hover.tres" id="5_lp458"]
+[ext_resource type="Texture2D" uid="uid://bapcyb47mxxnh" path="res://resources/menu/menu_tileset.png" id="6_lp458"]
 
-[node name="SettingsPanel" type="Control" unique_id=1063160638]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rm0bh"]
+texture = ExtResource("2_bbxxw")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_75ucs"]
+content_margin_left = 397.0
+content_margin_top = 193.0
+draw_center = false
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wnlp6"]
+texture = ExtResource("4_cax3f")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q0xkb"]
+texture = ExtResource("5_lp458")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xqh6d"]
+texture = ExtResource("5_lp458")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6fhyq"]
+content_margin_left = 33.0
+content_margin_top = 3.0
+content_margin_right = 33.0
+content_margin_bottom = 3.0
+texture = ExtResource("6_lp458")
+region_rect = Rect2(551, 541, 357, 53)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lp458"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uhagc"]
+texture = ExtResource("3_5qqek")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q85j6"]
+texture = ExtResource("4_bbxxw")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_btxxm"]
+texture = ExtResource("4_bbxxw")
+
+[node name="SettingsPanel" type="Control" unique_id=1698926782]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -1152.0
-offset_bottom = -648.0
+offset_right = 4.0
+offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dbor5")
 
-[node name="TabContainer" type="TabContainer" parent="." unique_id=1254041157]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=2030959471]
 layout_mode = 0
-offset_right = 1151.0
-offset_bottom = 660.0
-current_tab = 0
+offset_right = 1921.0
+offset_bottom = 1081.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_rm0bh")
 
-[node name="Audio" type="VBoxContainer" parent="TabContainer" unique_id=958517424]
+[node name="TabContainer" type="TabContainer" parent="PanelContainer" unique_id=1254041157]
 layout_mode = 2
-metadata/_tab_index = 0
+offset_transform_enabled = true
+theme_override_fonts/font = ExtResource("3_bbxxw")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/panel = SubResource("StyleBoxFlat_75ucs")
+theme_override_styles/tab_unselected = SubResource("StyleBoxTexture_wnlp6")
+theme_override_styles/tab_hovered = SubResource("StyleBoxTexture_q0xkb")
+theme_override_styles/tab_selected = SubResource("StyleBoxTexture_xqh6d")
+tab_alignment = 1
+current_tab = 1
 
-[node name="MusicSlider" type="HSlider" parent="TabContainer/Audio" unique_id=906795598]
-layout_mode = 2
-
-[node name="SFXSlider" type="HSlider" parent="TabContainer/Audio" unique_id=1392618078]
-layout_mode = 2
-
-[node name="Music" type="Label" parent="TabContainer/Audio" unique_id=1226210061]
-layout_mode = 2
-text = "Music"
-
-[node name="SFX" type="Label" parent="TabContainer/Audio" unique_id=1000465423]
-layout_mode = 2
-text = "SFX"
-
-[node name="Controls" type="VBoxContainer" parent="TabContainer" unique_id=2080791576]
+[node name="Audio" type="VBoxContainer" parent="PanelContainer/TabContainer" unique_id=958517424]
 visible = false
 layout_mode = 2
+offset_transform_enabled = true
+theme_override_constants/separation = 60
+metadata/_tab_index = 0
+
+[node name="MusicSlider" type="HSlider" parent="PanelContainer/TabContainer/Audio" unique_id=906795598]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+max_value = 10.0
+
+[node name="SFXSlider" type="HSlider" parent="PanelContainer/TabContainer/Audio" unique_id=1392618078]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+max_value = 10.0
+
+[node name="Music" type="Label" parent="PanelContainer/TabContainer/Audio" unique_id=1226210061]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(-136, -182)
+theme_override_fonts/font = ExtResource("3_bbxxw")
+theme_override_font_sizes/font_size = 65
+text = "Music"
+
+[node name="SFX" type="Label" parent="PanelContainer/TabContainer/Audio" unique_id=1000465423]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(-141, -241)
+theme_override_fonts/font = ExtResource("3_bbxxw")
+theme_override_font_sizes/font_size = 65
+text = "SFX"
+
+[node name="Controls" type="VBoxContainer" parent="PanelContainer/TabContainer" unique_id=2080791576]
+layout_mode = 2
+offset_transform_enabled = true
+theme_override_constants/separation = 30
 metadata/_tab_index = 1
 
-[node name="Label" type="Label" parent="TabContainer/Controls" unique_id=1674856264]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/TabContainer/Controls" unique_id=1859295091]
 layout_mode = 2
-text = "example"
+size_flags_horizontal = 0
+offset_transform_enabled = true
+theme_override_styles/panel = SubResource("StyleBoxTexture_6fhyq")
 
-[node name="Label2" type="Label" parent="TabContainer/Controls" unique_id=1998910225]
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/Controls/PanelContainer" unique_id=1674856264]
 layout_mode = 2
-text = "example2"
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("3_bbxxw")
+theme_override_font_sizes/font_size = 65
+text = "Вправо"
 
-[node name="Label3" type="Label" parent="TabContainer/Controls" unique_id=2091380844]
+[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/TabContainer/Controls" unique_id=825037599]
 layout_mode = 2
-text = "example3"
+size_flags_horizontal = 0
+offset_transform_enabled = true
+theme_override_styles/panel = SubResource("StyleBoxTexture_6fhyq")
 
-[node name="BackButton" type="Button" parent="." unique_id=1022316247]
+[node name="Label2" type="Label" parent="PanelContainer/TabContainer/Controls/PanelContainer2" unique_id=1998910225]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("3_bbxxw")
+theme_override_font_sizes/font_size = 65
+text = "Влево"
+
+[node name="PanelContainer3" type="PanelContainer" parent="PanelContainer/TabContainer/Controls" unique_id=1417914228]
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+theme_override_styles/panel = SubResource("StyleBoxTexture_6fhyq")
+
+[node name="Label3" type="Label" parent="PanelContainer/TabContainer/Controls/PanelContainer3" unique_id=2091380844]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("3_bbxxw")
+theme_override_font_sizes/font_size = 65
+text = "Удар"
+
+[node name="PanelContainer4" type="PanelContainer" parent="PanelContainer/TabContainer/Controls" unique_id=331501080]
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+theme_override_styles/panel = SubResource("StyleBoxTexture_6fhyq")
+
+[node name="Label4" type="Label" parent="PanelContainer/TabContainer/Controls/PanelContainer4" unique_id=336118976]
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+theme_override_fonts/font = ExtResource("3_bbxxw")
+theme_override_font_sizes/font_size = 65
+theme_override_styles/normal = SubResource("StyleBoxTexture_lp458")
+text = "Прыжок"
+
+[node name="PanelContainer5" type="PanelContainer" parent="PanelContainer/TabContainer/Controls" unique_id=1329886154]
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+theme_override_styles/panel = SubResource("StyleBoxTexture_6fhyq")
+
+[node name="Label5" type="Label" parent="PanelContainer/TabContainer/Controls/PanelContainer5" unique_id=437629488]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("3_bbxxw")
+theme_override_font_sizes/font_size = 65
+text = "что-то еще"
+
+[node name="PanelContainer6" type="PanelContainer" parent="PanelContainer/TabContainer/Controls" unique_id=79361572]
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+theme_override_styles/panel = SubResource("StyleBoxTexture_6fhyq")
+
+[node name="Label6" type="Label" parent="PanelContainer/TabContainer/Controls/PanelContainer6" unique_id=1466542970]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("3_bbxxw")
+theme_override_font_sizes/font_size = 65
+text = "что-то ещё"
+
+[node name="PanelContainer7" type="PanelContainer" parent="PanelContainer/TabContainer/Controls" unique_id=987986347]
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+theme_override_styles/panel = SubResource("StyleBoxTexture_6fhyq")
+
+[node name="Label7" type="Label" parent="PanelContainer/TabContainer/Controls/PanelContainer7" unique_id=1409675690]
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(381, -626)
+theme_override_fonts/font = ExtResource("3_bbxxw")
+theme_override_font_sizes/font_size = 65
+theme_override_styles/normal = SubResource("StyleBoxTexture_lp458")
+text = "D"
+
+[node name="PanelContainer8" type="PanelContainer" parent="PanelContainer/TabContainer/Controls" unique_id=1956745360]
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+theme_override_styles/panel = SubResource("StyleBoxTexture_6fhyq")
+
+[node name="Label8" type="Label" parent="PanelContainer/TabContainer/Controls/PanelContainer8" unique_id=1885039806]
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(381, -626)
+theme_override_fonts/font = ExtResource("3_bbxxw")
+theme_override_font_sizes/font_size = 65
+text = "A"
+
+[node name="PanelContainer9" type="PanelContainer" parent="PanelContainer/TabContainer/Controls" unique_id=710146698]
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+theme_override_styles/panel = SubResource("StyleBoxTexture_6fhyq")
+
+[node name="Label9" type="Label" parent="PanelContainer/TabContainer/Controls/PanelContainer9" unique_id=500710918]
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(381, -626)
+theme_override_fonts/font = ExtResource("3_bbxxw")
+theme_override_font_sizes/font_size = 65
+text = "E"
+
+[node name="PanelContainer10" type="PanelContainer" parent="PanelContainer/TabContainer/Controls" unique_id=1175950866]
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+theme_override_styles/panel = SubResource("StyleBoxTexture_6fhyq")
+
+[node name="Label10" type="Label" parent="PanelContainer/TabContainer/Controls/PanelContainer10" unique_id=1428290794]
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(381, -626)
+theme_override_fonts/font = ExtResource("3_bbxxw")
+theme_override_font_sizes/font_size = 65
+theme_override_styles/normal = SubResource("StyleBoxTexture_lp458")
+text = "SPACE"
+
+[node name="PanelContainer11" type="PanelContainer" parent="PanelContainer/TabContainer/Controls" unique_id=1067252203]
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+theme_override_styles/panel = SubResource("StyleBoxTexture_6fhyq")
+
+[node name="Label11" type="Label" parent="PanelContainer/TabContainer/Controls/PanelContainer11" unique_id=1964458999]
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(381, -626)
+theme_override_fonts/font = ExtResource("3_bbxxw")
+theme_override_font_sizes/font_size = 65
+text = "Q"
+
+[node name="PanelContainer12" type="PanelContainer" parent="PanelContainer/TabContainer/Controls" unique_id=12593186]
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+theme_override_styles/panel = SubResource("StyleBoxTexture_6fhyq")
+
+[node name="Label12" type="Label" parent="PanelContainer/TabContainer/Controls/PanelContainer12" unique_id=1478101822]
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(381, -626)
+theme_override_fonts/font = ExtResource("3_bbxxw")
+theme_override_font_sizes/font_size = 65
+text = "F"
+
+[node name="BackButton" type="Button" parent="." unique_id=1574664607]
 layout_mode = 0
-offset_left = 15.0
-offset_top = 513.0
-offset_right = 397.0
-offset_bottom = 636.0
+offset_left = 240.0
+offset_top = 898.0
+offset_right = 616.2842
+offset_bottom = 1008.0
+theme_override_fonts/font = ExtResource("3_bbxxw")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxTexture_uhagc")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_q85j6")
+theme_override_styles/hover = SubResource("StyleBoxTexture_btxxm")
 text = "Back"

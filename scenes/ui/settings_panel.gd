@@ -1,7 +1,7 @@
 extends Control
 
-@onready var music_slider: HSlider = $TabContainer/Audio/MusicSlider
-@onready var sfx_slider: HSlider = $TabContainer/Audio/SFXSlider
+@onready var music_slider: HSlider = $PanelContainer/TabContainer/Audio/MusicSlider
+@onready var sfx_slider: HSlider = $PanelContainer/TabContainer/Audio/SFXSlider
 @onready var back_button: Button = $BackButton
 
 signal back_pressed
@@ -9,9 +9,9 @@ signal back_pressed
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	music_slider.min_value = 0.0
-	music_slider.max_value = 1.0
+	music_slider.max_value = 10.0
 	sfx_slider.min_value = 0.0
-	sfx_slider.max_value = 1.0
+	sfx_slider.max_value = 10.0
 	
 	var music_bus = AudioServer.get_bus_index("Music")
 	var sfx_bus = AudioServer.get_bus_index("SFX")
