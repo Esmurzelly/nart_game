@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpnjxw28tk1ce"
-path="res://.godot/imported/run3232.png-286dcded4fde62499149a70548621716.ctex"
+uid="uid://ctuff4jetkhib"
+path="res://.godot/imported/run1.png-c34771f34d93c0adde1a842b6582fffb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/player/kurko/Sprites/temp/run3232.png"
-dest_files=["res://.godot/imported/run3232.png-286dcded4fde62499149a70548621716.ctex"]
+source_file="res://scenes/player/kurko/Sprites/temp/run1.png"
+dest_files=["res://.godot/imported/run1.png-c34771f34d93c0adde1a842b6582fffb.ctex"]
 
 [params]
 

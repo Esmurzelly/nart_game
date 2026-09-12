@@ -1,7 +1,0 @@
-[gd_resource type="AtlasTexture" format=3 uid="uid://cou8ceb7neijw"]
-
-[ext_resource type="Texture2D" uid="uid://dh48n7ddhiogm" path="res://assets/DarkAgesUi_v1.0/32x32-Tilesheet.png" id="1_c40vm"]
-
-[resource]
-atlas = ExtResource("1_c40vm")
-region = Rect2(96, 0, 96, 96)

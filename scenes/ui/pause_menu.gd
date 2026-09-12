@@ -18,7 +18,7 @@ func _ready() -> void:
 	settings_button.pressed.connect(func(): settings_panel.visible = true)
 	quit_button.pressed.connect(_on_quit_to_menu_pressed)
 	settings_panel.back_pressed.connect(func(): settings_panel.visible = false)
-
+	
 func _on_quit_to_menu_pressed() -> void:
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
