@@ -480,8 +480,10 @@ rock_scene = ExtResource("4_uwnop")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1558324491]
 position = Vector2(1, -13)
 sprite_frames = SubResource("SpriteFrames_3xd07")
-animation = &"walk"
+animation = &"hurt"
 autoplay = "idle"
+frame = 2
+frame_progress = 1.0
 
 [node name="Hitbox" parent="AnimatedSprite2D" unique_id=1002140977 instance=ExtResource("4_bybhu")]
 

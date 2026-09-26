@@ -1,20 +1,24 @@
 join kurko center
 join ciclopus center
 if {CiclopusFall} == true:
-	kurko: finnally I killed him
-	kurko: I gotta go next
+	kurko: Наконец-то я его убил
+	kurko: Надо выбираться отсюда
 	[end_timeline]
 if {CiclopusFall} == false:
-	ciclopus: u? u gotta be chased and prisoned!
-	kurko: who am I? who are you?
-	ciclopus: smth else
-	kurko: fa watafaaa
-	- fight
+	ciclopus: Как?! Это невозможно! Как ты тут оказался? Ты должен был быть запертым по приказу Тга
+	kurko: Кто я? И кто ты такой?
+	ciclopus: Так ты ещё и память потерял
+	ciclopus: Хотя...
+	ciclopus: Это не самое худшее что происходило с тобой. Пора тебе указать на своё место
+	kurko: Видимо, иного варианта не остается
+	- Сражаться
+		ciclopus: Так уж и быть
+		ciclopus: Ты всё равно забудешь этот диалог, меня и всё, что тут произошло
 		[signal arg="accept"]
 		[end_timeline]
-	- dialogue
-		kurko: что-то еще говорит
-		ciclopus: что-то еще отвечает
-		kurko: что-то еще спрашивает
-		ciclopus: короче, ему надоело всё, он хочет драцааааа
+	- Продолжить диалог
+		kurko: Кто все эти твари? И почему у тебя один глаз?
+		ciclopus: Память ушла, а вот любознательность осталась, ха-ха
+		kurko: Хватить трепать языком! Говори!
+		ciclopus: Те твари - мои подопечные, а я - Циклоп. Мы охраняли тебя долгие годы по приказу великого Тга. Но тебе эта информация не понадобится, ты всё равно забудешь этот диалог, меня и всё, что тут произошло
 		[end_timeline]
